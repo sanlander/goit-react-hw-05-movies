@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
-  padding-top: 20px;
-`;
-
 export const Input = styled.input`
   box-sizing: border-box;
   width: 300px;

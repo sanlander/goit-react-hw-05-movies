@@ -1,4 +1,4 @@
-import { Input, Form, Button } from './Movies.modules';
+import { Input, Button } from './Movies.styled';
 
 export const Movies = () => {
   const handleFormSubmit = e => {
@@ -7,12 +7,12 @@ export const Movies = () => {
 
   return (
     <main>
-      <Form>
+      <form>
         <Input type="text"></Input>
         <Button onClick={handleFormSubmit} type="submit">
           Search
         </Button>
-      </Form>
+      </form>
     </main>
   );
 };

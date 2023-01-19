@@ -7,3 +7,11 @@ export const getTrending = () => {
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${KEY}`
   ).then(r => r.data.results);
 };
+
+export const getMovieDetails = id => {
+  return axios(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${KEY}&language=en-US`
+  ).then(r => {
+    return r.data;
+  });
+};
