@@ -8,7 +8,7 @@ export const DetailsContainer = styled.div`
 `;
 
 export const DetailsImg = styled.div`
-  width: 300px;
+  width: 250px;
 
   > img {
     max-width: 100%;

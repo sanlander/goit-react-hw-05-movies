@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'movieAPI';
 import {
   DetailsContainer,
@@ -10,6 +9,7 @@ import {
 import { BtnGoBack } from '../../components/BtnGoBack/BtnGoBack';
 
 export const MovieDetails = () => {
+  const location = useLocation();
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -26,11 +26,11 @@ export const MovieDetails = () => {
   const BASE_URL_IMG = `https://image.tmdb.org/t/p/w500${poster_path}`;
   const releaseYear = release_date.slice(0, 4);
   const score = (vote_average * 10).toFixed(0);
-  //   console.log(genres);
+  const backLinkHref = location.state?.from ?? '/';
 
   return (
     <>
-      <BtnGoBack />
+      <BtnGoBack href={backLinkHref} />
       <DetailsContainer>
         <DetailsImg>
           <img src={BASE_URL_IMG} alt={title} />
@@ -52,13 +52,20 @@ export const MovieDetails = () => {
         <h3>Additional information</h3>
         <ul>
           <li>
-            <Link to="/"> Cast </Link>
+            <Link to="cast" state={{ from: backLinkHref }}>
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to="/"> Reviews </Link>
+            <Link to="reviews" state={{ from: backLinkHref }}>
+              Reviews
+            </Link>
           </li>
         </ul>
       </AdditionalContainer>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
